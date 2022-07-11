@@ -26,7 +26,6 @@ export class AuthService {
         };
     }
 
-
     async signUp(dto: CreateUserDto) {
         const candidate = await this.userService.getUserByEmail(dto.email);
         if (candidate) {
