@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Patch, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Patch, Post, UseGuards, UsePipes } from '@nestjs/common';
 import { UsersService } from './users.service';
 import CreateUserDto from './DTO/create-user.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -9,6 +9,7 @@ import { Roles } from '../auth/roles-auth.decorator';
 import AddUserRoleDto from './DTO/add-role.dto';
 import BanUserDto from './DTO/ban-user.dto';
 import UnbanUserDto from './DTO/unban-user.dto';
+import ValidationPipe from '../pipes/validation.pipe';
 
 @ApiTags('Users')
 @Controller('users')
@@ -38,6 +39,7 @@ export class UsersController {
     @ApiResponse({ status: 200, type: User })
     @Roles('Admin')
     @UseGuards(RolesGuard)
+    @UsePipes(ValidationPipe)
     @Patch('/add_role')
     assignRole(@Body() dto: AddUserRoleDto) {
         return this.usersService.assignRole(dto);
