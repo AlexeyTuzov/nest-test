@@ -15,7 +15,7 @@ export class RolesController {
     @UsePipes(ValidationPipe)
     @Post()
     create(@Body() dto: CreateRoleDto) {
-        return this.rolesService.createRole(dto)
+        return this.rolesService.createRole(dto);
     }
 
     @ApiOperation({ summary: 'Get User role'})
